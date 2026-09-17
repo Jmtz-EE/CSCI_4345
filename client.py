@@ -9,22 +9,25 @@ clientSocket = socket(AF_INET, SOCK_DGRAM)
 #create a message
 
 
-#TASK ) send to a friend is stead of own 
+#TASK 0 send to a friend is stead of own 
 
 
 #Task 2 b: Recieve a reply from the server after sending 
 while True: 
     #create a message 
-    msg = input('msg to send\n')
+    msg = input('Message to send: ')
 
     #turn this into bytes for the buffer 
     msg = msg.encode()
 
     #send the messege # go back to 127.0.0.1
-    clientSocket.sendto(msg, ('172.28.140.55', 12345))
+    clientSocket.sendto(msg, ('127.0.0.1', 12345))
+
+    msg2, serverAddr = clientSocket.recvfrom(2048)
+    print(msg2.decode())
 
     if msg.decode() == 'exit':
         break
 
 #Tidy up - close the socket 
-clientSocket.close()
+#clientSocket.close()
